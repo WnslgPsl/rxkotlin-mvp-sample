@@ -13,6 +13,10 @@ import java.nio.channels.Selector
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
+//    override var presenter: MainContract.Presenter
+//        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+//        set(value) {}
+
     private val networkDialog: NetworkDialog by lazy {
         NetworkDialog(this@MainActivity)
     }
@@ -21,9 +25,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         MainRepository()
     }
 
-    private val presenter: HomePresenter by lazy {
-        HomePresenter(this@MainActivity, mainRepository, mainAdapter, mainAdapter)
-    }
+    override lateinit var presenter: MainContract.Presenter
 
     private val mainAdapter: MainRecyclerAdapter by lazy {
         MainRecyclerAdapter(this@MainActivity)
@@ -41,9 +43,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         mainRecyclerView.run {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
             adapter = mainAdapter
-
         }
 
+        presenter = HomePresenter(this@MainActivity, mainRepository, mainAdapter, mainAdapter)
         presenter.loadFlickrPhotos()
     }
 

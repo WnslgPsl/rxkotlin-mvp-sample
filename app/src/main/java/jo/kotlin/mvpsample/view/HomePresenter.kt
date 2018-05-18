@@ -18,6 +18,9 @@ class HomePresenter(val view: MainContract.View, val mainRepository: MainReposit
                     val adapterModel: MainAdapterContract.Model) : MainContract.Presenter {
 
     init {
+
+        view.presenter = this
+
         adapterView.onItemClicked = {
             view.showDetailInfo(adapterModel.getItem(it).title)
         }

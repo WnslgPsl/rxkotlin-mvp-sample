@@ -6,7 +6,7 @@ package jo.kotlin.mvpsample
 
 interface MainContract {
 
-    interface View{
+    interface View : BaseView<Presenter>{
         fun hideProgress()
         fun showProgress()
         fun showMessage(msg: String)

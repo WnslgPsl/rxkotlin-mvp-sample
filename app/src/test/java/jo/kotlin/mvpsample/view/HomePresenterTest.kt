@@ -19,6 +19,7 @@ import org.junit.Test
 import org.mockito.*
 
 import org.mockito.ArgumentCaptor
+import org.mockito.Mockito.`when`
 
 
 /**
@@ -52,6 +53,7 @@ class HomePresenterTest {
 
         MockitoAnnotations.initMocks(this)
 
+        homePresenter = HomePresenter(mainContractView, mainRepository, mainAdapterContractView, mainAdapterContractModel)
 //        mainContractView = Mockito.mock(MainContract.View::class.java)
 //        mainAdapterContractView = Mockito.mock(MainAdapterContract.View::class.java)
 //        mainAdapterContractModel = Mockito.mock(MainAdapterContract.Model::class.java)
@@ -61,7 +63,6 @@ class HomePresenterTest {
 
 //        photoResponse = Mockito.mock(PhotoResponse::class.java)
 
-        homePresenter = HomePresenter(mainContractView, mainRepository, mainAdapterContractView, mainAdapterContractModel)
     }
 
     @After
@@ -69,12 +70,14 @@ class HomePresenterTest {
     }
 
     @Test
-    fun loadFlickrPhotos() {
+    fun createPresenter_setsThePresenterToView() {
+
+
         homePresenter.loadFlickrPhotos()
 
-        verify(mainRepository).getSearchPhotos(eq("json"), eq("1"),
-                eq("flickr.photos.search"), eq("LOVE"), eq(BuildConfig.FLICKR_API_KEY), eq(1),
-                eq(200), capture(getLoadFlickrCallbackCaptor))
+//        verify(mainRepository).getSearchPhotos(eq("json"), eq("1"),
+//                eq("flickr.photos.search"), eq("LOVE"), eq(BuildConfig.FLICKR_API_KEY), eq(1),
+//                eq(200), capture(getLoadFlickrCallbackCaptor))
 
 //        getLoadFlickrCallbackCaptor.value.onSuccess(photoResponse)
 
@@ -85,7 +88,8 @@ class HomePresenterTest {
 
 //        getLoadFlickrCallbackCaptor.value.onSuccess(photoResponse)
 
-        verify(homePresenter.view).showProgress()
+        verify(mainContractView).presenter = homePresenter
+
 
 //        Thread.sleep(3000)
 //        verify(homePresenter.view).hideProgress()
