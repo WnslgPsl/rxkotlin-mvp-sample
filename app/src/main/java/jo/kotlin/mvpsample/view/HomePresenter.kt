@@ -38,7 +38,6 @@ class HomePresenter(val view: MainContract.View, val mainRepository: MainReposit
                 view.hideProgress()
 
                 val stat = photoResponse?.stat
-                System.out.println("stat = $stat")
                 if(stat.equals("ok")){
 //                    Log.d("seongjun", stat);
                     adapterModel.addItems(photoResponse.photos.photo)
