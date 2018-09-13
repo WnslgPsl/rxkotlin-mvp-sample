@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     }
 
-    private fun initView(){
+    private fun initView() {
         mainRecyclerView.run {
             layoutManager = GridLayoutManager(this@MainActivity, 2)
             adapter = mainAdapter
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun hideProgress() {
-        if(networkDialog.isShowing) networkDialog.dismissNetworkDialog()
+        if (networkDialog.isShowing) networkDialog.dismissNetworkDialog()
     }
 
     override fun showMessage(msg: String) {
@@ -69,9 +69,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
-        if(presenter.compositeDisposable.size() > 0){
-            Log.d("seongjun_siee", "${presenter.compositeDisposable.size()} size")
+        if (presenter.compositeDisposable.size() > 0) {
+            presenter.compositeDisposable.dispose()
         }
-//        presenter.compositeDisposable.dispose()
     }
 }
