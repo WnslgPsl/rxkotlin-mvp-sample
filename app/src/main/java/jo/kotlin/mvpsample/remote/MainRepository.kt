@@ -1,5 +1,6 @@
 package jo.kotlin.mvpsample.remote
 
+import io.reactivex.Single
 import jo.kotlin.mvpsample.util.Mockable
 import jo.kotlin.mvpsample.view.data.PhotoResponse
 
@@ -16,18 +17,20 @@ class MainRepository : MainDataSource{
 
     override fun getSearchPhotos(format: String, nojsoncallback: String, method: String,
                                  searchKeyword: String, flickrKey: String, requestPage: Int,
-                                 requestPerPage: Int, callback: MainDataSource.LoadFlickrCallback) {
+                                 requestPerPage: Int): Single<PhotoResponse> {
 
-        remoteDataSource.getSearchPhotos(format, nojsoncallback, method, searchKeyword, flickrKey, requestPage, requestPerPage,
-                object : MainDataSource.LoadFlickrCallback {
+        return remoteDataSource.getSearchPhotos(format, nojsoncallback, method, searchKeyword, flickrKey, requestPage, requestPerPage)
 
-                    override fun onSuccess(t: PhotoResponse) {
-                        callback.onSuccess(t)
-                    }
-
-                    override fun onFailure(message: String) {
-                        callback.onFailure(message)
-                    }
-                })
+//        remoteDataSource.getSearchPhotos(format, nojsoncallback, method, searchKeyword, flickrKey, requestPage, requestPerPage,
+//                object : MainDataSource.LoadFlickrCallback {
+//
+//                    override fun onSuccess(t: PhotoResponse) {
+//                        callback.onSuccess(t)
+//                    }
+//
+//                    override fun onFailure(message: String) {
+//                        callback.onFailure(message)
+//                    }
+//                })
     }
 }

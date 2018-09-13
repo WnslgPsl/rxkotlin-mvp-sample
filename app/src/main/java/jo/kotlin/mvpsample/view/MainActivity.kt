@@ -3,6 +3,7 @@ package jo.kotlin.mvpsample
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.util.Log
 import android.widget.Toast
 import jo.kotlin.mvpsample.network.retrofit.createRetrofit
 import jo.kotlin.mvpsample.remote.MainRepository
@@ -12,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.nio.channels.Selector
 
 class MainActivity : AppCompatActivity(), MainContract.View {
+
 
 //    override var presenter: MainContract.Presenter
 //        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
@@ -63,5 +65,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun showDetailInfo(title: String) {
         Toast.makeText(this@MainActivity, title, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(presenter.compositeDisposable.size() > 0){
+            Log.d("seongjun_siee", "${presenter.compositeDisposable.size()} size")
+        }
+//        presenter.compositeDisposable.dispose()
     }
 }

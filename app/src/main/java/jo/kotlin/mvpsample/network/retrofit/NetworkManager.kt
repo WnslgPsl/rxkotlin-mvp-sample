@@ -17,7 +17,6 @@ class NetworkManager<T> (val call:Call<T> )  {
         call.enqueue(object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
 
-                System.out.println()
                 if (response.isSuccessful) {
                     if (response.body() != null) {
                         mNetworkCallbackListener.onResponse(response.body() as T)

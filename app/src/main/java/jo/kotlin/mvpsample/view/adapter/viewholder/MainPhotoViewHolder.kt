@@ -10,7 +10,7 @@ import java.util.ArrayList
 /**
  * Created by Jo on 2018. 4. 3.
  */
- 
+
 class MainPhotoViewHolder(itemView: View, onItemClicked: (Int) -> Unit) : CustomRecyclerViewHolder<ArrayList<Photo>>(itemView) {
 
     init {

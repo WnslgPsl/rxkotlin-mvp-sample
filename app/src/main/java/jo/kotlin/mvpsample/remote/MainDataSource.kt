@@ -1,5 +1,6 @@
 package jo.kotlin.mvpsample.remote
 
+import io.reactivex.Single
 import jo.kotlin.mvpsample.view.data.PhotoResponse
 
 /**
@@ -15,5 +16,8 @@ interface MainDataSource {
     }
 
     fun getSearchPhotos(format: String, nojsoncallback: String, method: String, searchKeyword: String, flickrKey: String, requestPage: Int,
-                                 requestPerPage: Int, callback: LoadFlickrCallback)
+                        requestPerPage: Int): Single<PhotoResponse>
+
+//fun getSearchPhotos(format: String, nojsoncallback: String, method: String, searchKeyword: String, flickrKey: String, requestPage: Int,
+//                    requestPerPage: Int, callback: LoadFlickrCallback)
 }
